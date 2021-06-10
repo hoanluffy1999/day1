@@ -1,0 +1,18 @@
+
+<input>
+<div *ngIf="user.age>13">
+    Bạn được phép xem nội dung
+</div>
+<ng-template #teamplatePG>
+    <div>
+        Bạn không đủ tuổi để xem nội dung
+    </div>
+</ng-template>
+
+<group-panel [(activeIndex)]="currentIndex">
+    <tab-panel title="First tab">Frint tab content</tab-panel>
+    <tab-panel title="First tab">Frint tab content</tab-panel>
+    <tab-panel title="First tab">Frint tab content</tab-panel>
+    <tab-panel title="First tab">Frint tab content</tab-panel>
+    <tab-panel title="First tab">Frint tab content</tab-panel>
+</group-panel>
