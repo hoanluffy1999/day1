@@ -7,7 +7,9 @@ import { TabPanelComponet } from "./tab-panel.componet";
         <div class="tab-headers">
             <div 
                 class="tab-header-item"
-                *ngFor="let tab of listPanel; let idx = idx"  
+                *ngFor="let tab of listPanel; let idx = index"
+                [class.active]="idx=== activeIndex"
+                (click)="activeIndexChange.emit(idx)"
             >
                 {{tab.title}}
                 <button (click)="removeTab(tab)"> x</button>
@@ -22,12 +24,24 @@ import { TabPanelComponet } from "./tab-panel.componet";
             <span>no tap</span>
         </ng-template>
     `,
-    styles:[]
+    styles:[
+        `
+        .tab-headers{
+            display:flex;
+            padding-bottom:0.5rem;
+            border-bottom: 0.1rem solid #000
+        }
+        .tab-header-item{
+            margin-right:0.5rem;
+            padding: 5px 10px;
+        }
+        `
+    ]
 })
 export class GroupPanelComponent{
     listPanel:TabPanelComponet[] = [];
     @Input() activeIndex:number
-    @Output() aciticeIndexChange = new EventEmitter<number>();
+    @Output() activeIndexChange = new EventEmitter<number>();
     
     addTab(tab:TabPanelComponet)
     {
@@ -48,7 +62,7 @@ export class GroupPanelComponent{
 
         if(found === this.activeIndex)
         {
-                this.aciticeIndexChange.emit(found === this.listPanel.length ? found -1 : found)
+                this.activeIndexChange.emit(found === this.listPanel.length ? found -1 : found)
         }
     }
 }
